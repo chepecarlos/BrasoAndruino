@@ -13,10 +13,10 @@ int ServoPines[7] = {7, 8, 9, 10, 11, 12, 13};
 
 /*
 7 pinza
-8 
-9 
-10 
-11 
+8 Muneca
+9 Mano
+10 Codo
+11 Ambro 
 12 
 13 
 */
@@ -38,7 +38,9 @@ void setup() {
     ServosLila[i].write(EstadoDefaul[i]);
     EstadoActual[i] = EstadoDefaul[i];
   }  
-    
+  ServosLila[7].attach(ServoPines[6]);
+    ServosLila[7].write(EstadoDefaul[6]);
+        
 }
 
 void loop() {
@@ -80,6 +82,7 @@ void Actualizar(){
    for(int i = 0; i<6; i++){
     ServosLila[i].write(EstadoActual[i]);
   }  
+  ServosLila[7].write(EstadoActual[6]);
 }
 
 void CambiarPosicion(int x){
