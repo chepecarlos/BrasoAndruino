@@ -5,12 +5,16 @@ int VecX = 0;     //Variale de hacia donde esta inclinado
 int JoyX = A0;
 
 int PunteroAura = 0;
-int Boton = 1;
 
 int Rango = 10; //Sensiblilidad del braso
 
-float t0 = millis();
-float t1 = t0;
+Servo ServosLila[7];
+int ServoPines[7] = {7, 8, 9, 10, 11, 12, 13};
+
+int EstadoDefaul[6] = { 0, 0, 0, 90, 0, 0};
+int EstadoActual[6];
+int RangoMin[6] = { 0, 0, 0, 90, 0, 0};
+int RangoMax[6] = { 0, 0, 0, 90, 0, 0};
 
 void setup() {
   Serial.begin(9600);//Inicar el puerto serial
@@ -19,6 +23,13 @@ void setup() {
       pinMode( i , INPUT);  
       digitalWrite( i, HIGH);
     }//Iniciando los botones   
+    
+   for(int i = 0; i<6; i++){
+    ServosLila[i].attach(ServoPines[i]);
+    ServosLila[i].write(EstadoDefaul[i]);
+    EstadoActual[i] = EstadoDefaul[i];
+  }  
+    
 }
 
 void loop() {
@@ -49,3 +60,5 @@ void loop() {
 int Movimiento_JOY(){
   return map( analogRead(JoyX), 0, 1023, -Rango , Rango );
 }
+
+
